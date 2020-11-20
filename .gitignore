@@ -27,3 +27,5 @@ hs_err_pid*
 *.bak*
 
 Conception/EAI.vpp.bak*
+
+RedacChefEJB/src/main/resources/META-INF/
