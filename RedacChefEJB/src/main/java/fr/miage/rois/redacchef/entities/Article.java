@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.miage.rois.redacchefejb;
+package fr.miage.rois.redacchef.entities;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Article.findByTitre", query = "SELECT a FROM Article a WHERE a.titre = :titre")
     , @NamedQuery(name = "Article.findByMotscles", query = "SELECT a FROM Article a WHERE a.motscles = :motscles")
     , @NamedQuery(name = "Article.findByAuteur", query = "SELECT a FROM Article a WHERE a.auteur = :auteur")
-    , @NamedQuery(name = "Article.findByContenu", query = "SELECT a FROM Article a WHERE a.contenu = :contenu")})
+    , @NamedQuery(name = "Article.findByContenu", query = "SELECT a FROM Article a WHERE a.contenu = :contenu")
+    , @NamedQuery(name = "Article.findByValide", query = "SELECT a FROM Article a WHERE a.valide = :valide")})
 public class Article implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,6 +53,8 @@ public class Article implements Serializable {
     @Size(max = 1000)
     @Column(name = "CONTENU")
     private String contenu;
+    @Column(name = "VALIDE")
+    private Boolean valide;
     @JoinColumn(name = "IDTITRE", referencedColumnName = "IDTITRE")
     @ManyToOne
     private Titre idtitre;
@@ -103,6 +106,14 @@ public class Article implements Serializable {
         this.contenu = contenu;
     }
 
+    public Boolean getValide() {
+        return valide;
+    }
+
+    public void setValide(Boolean valide) {
+        this.valide = valide;
+    }
+
     public Titre getIdtitre() {
         return idtitre;
     }
@@ -133,7 +144,7 @@ public class Article implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.miage.rois.redacchefejb.Article[ idarticle=" + idarticle + " ]";
+        return "fr.miage.rois.redacchef.entities.Article[ idarticle=" + idarticle + " ]";
     }
     
 }

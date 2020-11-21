@@ -11,6 +11,7 @@ create table Article (
     auteur int,
     contenu varchar(1000),
     idTitre int,
+	valide boolean DEFAULT false,
     CONSTRAINT fk_article_titre_idTitre FOREIGN KEY (idTitre) REFERENCES Titre(idTitre)
 );
 
