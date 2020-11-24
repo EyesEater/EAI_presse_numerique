@@ -6,6 +6,7 @@
 package fr.miage.rois.recherchearchive.metier;
 
 import fr.miage.rois.recherchearchive.entities.Volume;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,13 @@ public class VolumeFacade extends AbstractFacade<Volume> implements VolumeFacade
 
     public VolumeFacade() {
         super(Volume.class);
+    }
+
+    @Override
+    public List<Volume> findByNom(String nom) {
+        return em.createQuery("SELECT * FROM volume WHERE nom LIKE :nom")
+                .setParameter("nom", nom)
+                .getResultList();
     }
     
 }

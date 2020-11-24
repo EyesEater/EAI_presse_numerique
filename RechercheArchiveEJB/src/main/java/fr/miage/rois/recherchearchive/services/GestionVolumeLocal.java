@@ -5,6 +5,8 @@
  */
 package fr.miage.rois.recherchearchive.services;
 
+import fr.miage.rois.recherchearchive.entities.Volume;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -13,5 +15,9 @@ import javax.ejb.Local;
  */
 @Local
 public interface GestionVolumeLocal {
+    
+    List<Volume> findByNom(String nom);
+    
+    void ajouterVolume(Volume volume);
     
 }

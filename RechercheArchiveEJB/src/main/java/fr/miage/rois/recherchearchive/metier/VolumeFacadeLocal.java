@@ -30,4 +30,6 @@ public interface VolumeFacadeLocal {
 
     int count();
     
+    List<Volume> findByNom(String nom);
+    
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.miage.rois.recherchearchive.metier;
+package fr.miage.rois.recherchearchive.services;
 
 import fr.miage.rois.recherchearchive.entities.Titre;
 import java.util.List;
@@ -14,20 +14,12 @@ import javax.ejb.Local;
  * @author sagab
  */
 @Local
-public interface TitreFacadeLocal {
-
-    void create(Titre titre);
-
-    void edit(Titre titre);
-
-    void remove(Titre titre);
-
-    Titre find(Object id);
-
-    List<Titre> findAll();
-
-    List<Titre> findRange(int[] range);
-
-    int count();
+public interface GestionTitreLocal {
+    
+    List<Titre> findByNom(String nom);
+    
+    List<Titre> findByMotsCles(String motsCles);
+    
+    void ajouterTitre(Titre titre);
     
 }

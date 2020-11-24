@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>fr.miage.rois</groupId>
-    <artifactId>RechercheArchive</artifactId>
+    <artifactId>RechercheArchiveEJB</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>ejb</packaging>
 
-    <name>RechercheArchive</name>
+    <name>RechercheArchiveEJB</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>

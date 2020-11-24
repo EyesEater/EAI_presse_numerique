@@ -6,6 +6,7 @@
 package fr.miage.rois.recherchearchive.metier;
 
 import fr.miage.rois.recherchearchive.entities.Titre;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,20 @@ public class TitreFacade extends AbstractFacade<Titre> implements TitreFacadeLoc
 
     public TitreFacade() {
         super(Titre.class);
+    }
+
+    @Override
+    public List<Titre> findByNom(String nom) {
+        return em.createQuery("SELECT * FROM Titre WHERE nom LIKE :nom")
+                .setParameter("nom", nom)
+                .getResultList();
+    }
+
+    @Override
+    public List<Titre> findByMotsCles(String motsCles) {
+        return em.createQuery("SELECT * FROM Titre WHERE motscles IN (:motscles)")
+                .setParameter("motscles", motsCles)
+                .getResultList();
     }
     
 }
