@@ -26,5 +26,10 @@ public class GestionTitre implements GestionTitreLocal {
     public void affecterTitre(Titre titre) {
         this.titreFacadeLocal.create(titre);
     }
+
+    @Override
+    public Titre findTitre(Integer idTitre) {
+        return this.titreFacadeLocal.find(idTitre);
+    }
     
 }

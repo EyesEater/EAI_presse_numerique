@@ -61,4 +61,14 @@ public class AppliRedacChef implements AppliRedacChefLocal {
         gestionArticleLocal.ajouterArticle(article);
     }
 
+    @Override
+    public Titre findTitre(Integer idTitre) {
+        return gestionTitreLocal.findTitre(idTitre);
+    }
+
+    @Override
+    public Article findArticle(Integer idArticle) {
+        return gestionArticleLocal.findArticle(idArticle);
+    }
+
 }

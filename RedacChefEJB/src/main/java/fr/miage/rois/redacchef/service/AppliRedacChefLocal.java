@@ -32,5 +32,9 @@ public interface AppliRedacChefLocal {
     public List<Article> listerArticlesValideByTitre(Titre titre);
     
     public void ajouterArticle(Article article);
+
+    public Titre findTitre(Integer idTitre);
+
+    public Article findArticle(Integer idArticle);
     
 }

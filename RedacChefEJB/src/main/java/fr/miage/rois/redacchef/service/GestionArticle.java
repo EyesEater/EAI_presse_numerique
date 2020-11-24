@@ -47,4 +47,9 @@ public class GestionArticle implements GestionArticleLocal {
         articleFacadeLocal.create(article);
     }
 
+    @Override
+    public Article findArticle(Integer idArticle) {
+        return articleFacadeLocal.find(idArticle);
+    }
+
 }

@@ -26,5 +26,7 @@ public interface GestionArticleLocal {
     public List<Article> listerArticlesValideByTitre(Titre titre);
     
     public void ajouterArticle(Article article);
+
+    public Article findArticle(Integer idArticle);
     
 }

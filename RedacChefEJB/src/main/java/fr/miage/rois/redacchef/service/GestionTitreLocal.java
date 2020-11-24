@@ -16,5 +16,7 @@ import javax.ejb.Local;
 public interface GestionTitreLocal {
     
     public void affecterTitre(Titre titre);
+
+    public Titre findTitre(Integer idTitre);
         
 }
