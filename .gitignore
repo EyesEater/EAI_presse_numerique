@@ -31,3 +31,7 @@ Conception/EAI.vpp.bak*
 /RedacChefEJB/target/
 /RechercheArchive/target/
 /RechercheArchiveEJB/target/
+/RechercheArchiveREST/target/
+/RechercheArchive/RechercheArchive-ejb/target/
+/RechercheArchive/RechercheArchive-web/target/
+/RechercheArchive/RechercheArchive-ear/target/
