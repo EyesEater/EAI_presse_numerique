@@ -29,9 +29,11 @@ public interface TitreFacadeLocal {
     List<Titre> findRange(int[] range);
 
     int count();
-    
-    Titre findByNom(String nom);
+
+    public Titre findByNom(String nom);
 
     public List<Titre> findByMotsCles(String motsCles);
+
+    public Titre findById(String idtitre);
     
 }

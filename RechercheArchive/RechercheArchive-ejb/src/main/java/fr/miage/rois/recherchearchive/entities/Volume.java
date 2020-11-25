@@ -120,7 +120,13 @@ public class Volume implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.miage.rois.recherchearchive.entities.Volume[ idvolume=" + idvolume + " ]";
+        StringBuilder st = new StringBuilder("{");
+        st.append("idvolume:").append(this.idvolume).append(",")
+                .append("nom:\"").append(this.nom).append("\",")
+                .append("numero:").append(this.numero).append(",")
+                .append("termine:").append(this.termine).append(",")
+                .append("titre:").append(this.idtitre.toString()).append("}");
+        return st.toString();
     }
     
 }

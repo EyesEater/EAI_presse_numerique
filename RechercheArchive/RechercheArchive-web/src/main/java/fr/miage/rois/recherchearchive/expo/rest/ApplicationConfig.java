@@ -36,8 +36,8 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(fr.miage.rois.recherchearchive.expo.rest.GestionTitreResource.class);
         resources.add(fr.miage.rois.recherchearchive.expo.rest.GestionVolumeResource.class);
-        resources.add(fr.miage.rois.recherchearchive.expo.rest.RechercheTitreResource.class);
-        resources.add(fr.miage.rois.recherchearchive.expo.rest.RechercheVolumeResource.class);
+        resources.add(fr.miage.rois.recherchearchive.expo.rest.TitreRechercheResource.class);
+        resources.add(fr.miage.rois.recherchearchive.expo.rest.VolumeRechercheResource.class);
     }
 
 }
