@@ -111,7 +111,17 @@ public class Titre implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.miage.rois.recherchearchive.entities.Titre[ idtitre=" + idtitre + " ]";
+        String[] motscles = this.motscles.split(",");
+        StringBuilder st = new StringBuilder("{");
+        st.append("idtitre:").append(this.idtitre).append(",")
+                .append("nom:\"").append(this.nom).append("\",")
+                .append("motscles:[");
+        
+        for (String mot : motscles) {
+            st.append("\"").append(mot).append("\",");
+        }
+        st.deleteCharAt(st.length()-1).append("]}");
+        return st.toString();
     }
     
 }

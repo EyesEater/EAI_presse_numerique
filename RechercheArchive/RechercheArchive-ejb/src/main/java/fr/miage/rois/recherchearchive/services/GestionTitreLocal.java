@@ -21,5 +21,7 @@ public interface GestionTitreLocal {
     List<Titre> findByMotsCles(String motsCles);
     
     void ajouterTitre(Titre titre);
+
+    public Titre findById(String idtitre);
     
 }

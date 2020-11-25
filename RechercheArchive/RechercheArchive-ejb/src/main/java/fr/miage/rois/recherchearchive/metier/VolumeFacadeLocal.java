@@ -5,6 +5,7 @@
  */
 package fr.miage.rois.recherchearchive.metier;
 
+import fr.miage.rois.recherchearchive.entities.Titre;
 import fr.miage.rois.recherchearchive.entities.Volume;
 import java.util.List;
 import javax.ejb.Local;
@@ -29,9 +30,9 @@ public interface VolumeFacadeLocal {
     List<Volume> findRange(int[] range);
 
     int count();
-    
+
     public Volume findByNom(String nom);
 
-    public List<Volume> findByTitreId(String titre);
+    public List<Volume> findByTitreId(Titre titre);
     
 }

@@ -36,4 +36,9 @@ public class GestionTitre implements GestionTitreLocal {
         titreFacadeLocal.create(titre);
     }
 
+    @Override
+    public Titre findById(String idtitre) {
+        return titreFacadeLocal.findById(idtitre);
+    }
+
 }

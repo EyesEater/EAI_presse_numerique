@@ -5,7 +5,9 @@
  */
 package fr.miage.rois.recherchearchive.services;
 
+import fr.miage.rois.recherchearchive.entities.Titre;
 import fr.miage.rois.recherchearchive.entities.Volume;
+import fr.miage.rois.recherchearchive.metier.TitreFacadeLocal;
 import fr.miage.rois.recherchearchive.metier.VolumeFacadeLocal;
 import java.util.List;
 import javax.ejb.EJB;
@@ -20,6 +22,9 @@ public class GestionVolume implements GestionVolumeLocal {
     
     @EJB
     private VolumeFacadeLocal volumeFacadeLocal;
+    
+    @EJB
+    private TitreFacadeLocal titreFacadeLocal;
 
     @Override
     public Volume findByNom(String nom) {
@@ -33,7 +38,8 @@ public class GestionVolume implements GestionVolumeLocal {
 
     @Override
     public List<Volume> findByTitreId(String titre) {
-        return volumeFacadeLocal.findByTitreId(titre);
+        Titre t = titreFacadeLocal.findById(titre);
+        return volumeFacadeLocal.findByTitreId(t);
     }
 
 }
