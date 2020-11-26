@@ -116,7 +116,7 @@ public class Publicite implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.miage.rois.misesouspresse.Publicite[ idpub=" + idpub + " ]";
+        return "fr.miage.rois.misesouspresse.entities.Publicite[ idpub=" + idpub + " ]";
     }
     
 }

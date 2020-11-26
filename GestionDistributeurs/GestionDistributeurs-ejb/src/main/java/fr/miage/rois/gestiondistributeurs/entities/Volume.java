@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.miage.rois.misesouspresse.entities;
+package fr.miage.rois.gestiondistributeurs.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -20,7 +18,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -50,8 +47,6 @@ public class Volume implements Serializable {
     private String nom;
     @Column(name = "NUMERO")
     private Integer numero;
-    @ManyToMany(mappedBy = "volumeCollection")
-    private Collection<Publicite> publiciteCollection;
     @JoinColumn(name = "IDTITRE", referencedColumnName = "IDTITRE")
     @ManyToOne
     private Titre idtitre;
@@ -95,15 +90,6 @@ public class Volume implements Serializable {
         this.numero = numero;
     }
 
-    @XmlTransient
-    public Collection<Publicite> getPubliciteCollection() {
-        return publiciteCollection;
-    }
-
-    public void setPubliciteCollection(Collection<Publicite> publiciteCollection) {
-        this.publiciteCollection = publiciteCollection;
-    }
-
     public Titre getIdtitre() {
         return idtitre;
     }
@@ -134,7 +120,7 @@ public class Volume implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.miage.rois.misesouspresse.entities.Volume[ idvolume=" + idvolume + " ]";
+        return "fr.miage.rois.gestiondistributeurs.entities.Volume[ idvolume=" + idvolume + " ]";
     }
     
 }

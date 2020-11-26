@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.miage.rois.misesouspresse.entities;
+package fr.miage.rois.gestiondistributeurs.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -48,6 +49,8 @@ public class Titre implements Serializable {
     private String motscles;
     @OneToMany(mappedBy = "idtitre")
     private Collection<Volume> volumeCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "titre")
+    private Collection<Abonner> abonnerCollection;
 
     public Titre() {
     }
@@ -89,6 +92,15 @@ public class Titre implements Serializable {
         this.volumeCollection = volumeCollection;
     }
 
+    @XmlTransient
+    public Collection<Abonner> getAbonnerCollection() {
+        return abonnerCollection;
+    }
+
+    public void setAbonnerCollection(Collection<Abonner> abonnerCollection) {
+        this.abonnerCollection = abonnerCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -111,7 +123,7 @@ public class Titre implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.miage.rois.misesouspresse.entities.Titre[ idtitre=" + idtitre + " ]";
+        return "fr.miage.rois.gestiondistributeurs.entities.Titre[ idtitre=" + idtitre + " ]";
     }
     
 }
