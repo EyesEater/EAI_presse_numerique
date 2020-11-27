@@ -48,13 +48,19 @@ public class RedacChefJMSListener implements MessageListener {
     public void onMessage(Message message) {
         try {
             if (message instanceof TextMessage) {
+                
                 TextMessage tm = (TextMessage) message;
-                    String articleJson = tm.getText();
+                String articleJson = tm.getText();
 
-                    JsonObject json = new JsonParser().parse(articleJson).getAsJsonObject();
+                JsonObject json = new JsonParser().parse(articleJson).getAsJsonObject();
 
-                    Integer idtitre = json.get("idtitre").getAsInt();
-                    Titre titre = appliRedacChefLocal.findTitre(idtitre);
+                Integer idtitre = json.get("idtitre").getAsInt();
+                Titre titre = appliRedacChefLocal.findTitre(idtitre);
+                
+                Integer idarticle = json.get("idarticle").getAsInt();
+                Article tmp = appliRedacChefLocal.findArticle(idarticle);
+
+                if (titre != null && tmp == null) {
 
                     Article article = new Article(json.get("idarticle").getAsInt());
                     article.setAuteur(json.get("auteur").getAsInt());
@@ -65,7 +71,9 @@ public class RedacChefJMSListener implements MessageListener {
                     article.setValide(json.get("valide").getAsBoolean());
 
                     appliRedacChefLocal.ajouterArticle(article);
+                    
                 }
+            }
         } catch (JMSException e) {
             e.printStackTrace();
             mdc.setRollbackOnly();

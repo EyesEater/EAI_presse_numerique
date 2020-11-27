@@ -1,0 +1,9 @@
+Aller dans la console asadmin:
+
+create-jms-resource --restype javax.jms.Queue QueueJ
+create-jms-resource --restype javax.jms.Queue QueueRC
+create-jms-resource --restype javax.jms.Queue QueuePub
+create-jms-resource --restype javax.jms.Queue QueueMSP
+create-jms-resource --restype javax.jms.Queue QueueD
+
+create-jms-resource --restype javax.jms.Topic TopicD
