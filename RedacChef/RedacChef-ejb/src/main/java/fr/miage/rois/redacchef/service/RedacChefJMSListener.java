@@ -18,8 +18,8 @@ import javax.ejb.MessageDrivenContext;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import javax.jms.StreamMessage;
 import javax.jms.TextMessage;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -39,9 +39,12 @@ public class RedacChefJMSListener implements MessageListener {
     private MessageDrivenContext mdc;
 
     private final Gson gson;
+    
+    private final Logger logger;
 
     public RedacChefJMSListener() {
         this.gson = new Gson();
+        logger = Logger.getLogger(RedacChefJMSListener.class);
     }
 
     @Override
@@ -62,7 +65,7 @@ public class RedacChefJMSListener implements MessageListener {
 
                 if (titre != null && tmp == null) {
 
-                    Article article = new Article(json.get("idarticle").getAsInt());
+                    Article article = new Article(idarticle);
                     article.setAuteur(json.get("auteur").getAsInt());
                     article.setContenu(json.get("contenu").getAsString());
                     article.setIdtitre(titre);
@@ -75,7 +78,7 @@ public class RedacChefJMSListener implements MessageListener {
                 }
             }
         } catch (JMSException e) {
-            e.printStackTrace();
+            logger.error("Erreur lors de l'intégration d'un nouvel Article en JMS.");
             mdc.setRollbackOnly();
         }
     }

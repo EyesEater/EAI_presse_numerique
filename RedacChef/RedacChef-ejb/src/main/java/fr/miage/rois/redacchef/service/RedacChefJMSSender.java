@@ -5,6 +5,7 @@
  */
 package fr.miage.rois.redacchef.service;
 
+import com.google.gson.Gson;
 import fr.miage.rois.redacchef.entities.Article;
 import java.util.List;
 import javax.jms.Connection;
@@ -13,17 +14,18 @@ import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
-import javax.jms.StreamMessage;
+import javax.jms.TextMessage;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author sagab
  */
 public class RedacChefJMSSender {
-    
-    public static void envoyerArticlesAMiseSousPresse(List<Article> articles) throws JMSException, NamingException {
+
+    public static void envoyerArticlesAMiseSousPresse(List<Article> articles) {
         ConnectionFactory factory;
         Connection connection;
         String factoryName = "jms/__defaultConnectionFactory";
@@ -31,41 +33,45 @@ public class RedacChefJMSSender {
         Destination dest;
         Session session;
         MessageProducer sender;
+        Gson gson = new Gson();
+        Logger logger = Logger.getLogger(RedacChefJMSSender.class);
 
-        System.setProperty("java.naming.factory.initial",
-                "com.sun.enterprise.naming.SerialInitContextFactory");
-        System.setProperty("org.omg.CORBA.ORBInitialHost", "127.0.0.1");
-        System.setProperty("org.omg.CORBA.ORBInitialPort", "3700");
-        InitialContext context = new InitialContext();
-        // look up the ConnectionFactory
-        factory = (ConnectionFactory) context.lookup(factoryName);
+        try {
+            System.setProperty("java.naming.factory.initial",
+                    "com.sun.enterprise.naming.SerialInitContextFactory");
+            System.setProperty("org.omg.CORBA.ORBInitialHost", "127.0.0.1");
+            System.setProperty("org.omg.CORBA.ORBInitialPort", "3700");
+            InitialContext context = new InitialContext();
+            // look up the ConnectionFactory
+            factory = (ConnectionFactory) context.lookup(factoryName);
 
-        // look up the Destination
-        dest = (Destination) context.lookup(destName);
+            // look up the Destination
+            dest = (Destination) context.lookup(destName);
 
-        // create the connection
-        connection = factory.createConnection();
+            // create the connection
+            connection = factory.createConnection();
 
-        // create the session
-        session = connection.createSession(
-                false, Session.AUTO_ACKNOWLEDGE);
+            // create the session
+            session = connection.createSession(
+                    false, Session.AUTO_ACKNOWLEDGE);
 
-        // create the sender
-        sender = session.createProducer(dest);
+            // create the sender
+            sender = session.createProducer(dest);
 
-        // start the connection, to enable message sends
-        connection.start();
+            // start the connection, to enable message sends
+            connection.start();
 
+            TextMessage tm = session.createTextMessage();
 
-        StreamMessage sm = session.createStreamMessage();
+            for (Article a : articles) {
+                tm.setText(gson.toJson(a));
+                sender.send(tm);
+            }
 
-        for (Article a : articles) {
-            sm.writeObject(a);
+            connection.close();
+        } catch (JMSException | NamingException e) {
+            logger.error("Error during sending list of validated Article with JMS.");
         }
-
-        sender.send(sm);
-        
-        connection.close();
     }
-    
+
 }

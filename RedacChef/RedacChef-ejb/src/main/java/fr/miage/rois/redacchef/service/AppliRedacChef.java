@@ -27,7 +27,7 @@ public class AppliRedacChef implements AppliRedacChefLocal {
     private GestionTitreLocal gestionTitreLocal;
 
     @Override
-    public void envoyerMiseSousPresse(Titre titre) throws JMSException, NamingException {
+    public void envoyerMiseSousPresse(Titre titre) {
         RedacChefJMSSender.envoyerArticlesAMiseSousPresse(gestionArticleLocal.listerArticlesByTitre(titre));
     }
 

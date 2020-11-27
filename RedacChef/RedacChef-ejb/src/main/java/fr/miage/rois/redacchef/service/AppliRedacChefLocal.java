@@ -19,7 +19,7 @@ import javax.naming.NamingException;
 @Local
 public interface AppliRedacChefLocal {
     
-    public void envoyerMiseSousPresse(Titre titre) throws JMSException, NamingException;
+    public void envoyerMiseSousPresse(Titre titre);
     
     public void affecterTitre(Titre titre);
     
