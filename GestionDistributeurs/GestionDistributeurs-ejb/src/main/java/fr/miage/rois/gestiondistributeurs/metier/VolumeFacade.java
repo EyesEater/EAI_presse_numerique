@@ -6,6 +6,7 @@
 package fr.miage.rois.gestiondistributeurs.metier;
 
 import fr.miage.rois.gestiondistributeurs.entities.Volume;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,13 @@ public class VolumeFacade extends AbstractFacade<Volume> implements VolumeFacade
 
     public VolumeFacade() {
         super(Volume.class);
+    }
+
+    @Override
+    public List<Volume> findVolumesByTitre(Integer idtitre) {
+        return getEntityManager().createQuery("SELECT v FROM Volume v WHERE v.idtitre = :titre")
+                .setParameter("titre", idtitre)
+                .getResultList();
     }
     
 }

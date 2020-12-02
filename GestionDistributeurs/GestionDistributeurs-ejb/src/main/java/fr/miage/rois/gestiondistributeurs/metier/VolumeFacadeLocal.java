@@ -29,5 +29,7 @@ public interface VolumeFacadeLocal {
     List<Volume> findRange(int[] range);
 
     int count();
+
+    public List<Volume> findVolumesByTitre(Integer idtitre);
     
 }
