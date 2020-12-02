@@ -6,6 +6,7 @@
 package fr.miage.rois.misesouspresse.metier;
 
 import fr.miage.rois.misesouspresse.entities.Publicite;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,12 @@ public class PubliciteFacade extends AbstractFacade<Publicite> implements Public
 
     public PubliciteFacade() {
         super(Publicite.class);
+    }
+
+    @Override
+    public List<Publicite> getPublicites() {
+        return getEntityManager().createQuery("SELECT p FROM Publicite p")
+                .getResultList();
     }
     
 }

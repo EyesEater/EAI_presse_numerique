@@ -6,6 +6,8 @@
 package fr.miage.rois.redacchef.service;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import fr.miage.rois.redacchef.entities.Article;
 import java.util.List;
 import javax.jms.Connection;
@@ -63,10 +65,16 @@ public class RedacChefJMSSender {
 
             TextMessage tm = session.createTextMessage();
 
+            JsonObject articlesJson = new JsonObject();
+            int i = 0;
             for (Article a : articles) {
-                tm.setText(gson.toJson(a));
-                sender.send(tm);
+                articlesJson.add("article" + i, new JsonParser().parse(gson.toJson(a)));
+                i++;
             }
+            
+            tm.setText(articlesJson.getAsString());
+            
+            sender.send(tm);
 
             connection.close();
         } catch (JMSException | NamingException e) {

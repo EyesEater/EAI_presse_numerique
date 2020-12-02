@@ -5,6 +5,12 @@
  */
 package fr.miage.rois.misesouspresse.services;
 
+import fr.miage.rois.misesouspresse.entities.Publicite;
+import fr.miage.rois.misesouspresse.entities.Volume;
+import fr.miage.rois.misesouspresse.metier.PubliciteFacadeLocal;
+import fr.miage.rois.misesouspresse.metier.VolumeFacadeLocal;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
@@ -13,7 +19,40 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class GestionVolume implements GestionVolumeLocal {
+    
+    @EJB
+    private VolumeFacadeLocal volumeFacadeLocal;
+    
+    @EJB
+    private PubliciteFacadeLocal publiciteFacadeLocal;
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @Override
+    public boolean creerVolume(Volume volume) {
+        this.volumeFacadeLocal.create(volume);
+        
+        Volume v = this.volumeFacadeLocal.findById(volume.getIdvolume());
+        if (v != null) {
+            return v.equals(volume);
+        }
+        
+        return false;
+    }
+
+    @Override
+    public void affecterNumeroAUnVolume(int numero, Volume volume) {
+        this.volumeFacadeLocal.affecterNumeroAUnVolume(numero, volume);
+    }
+
+    @Override
+    public void affecterEncartsPublicitaires(Volume volume) {
+        List<Publicite> pubs = this.publiciteFacadeLocal.getPublicites();
+        
+        this.volumeFacadeLocal.affecterListPub(volume, pubs);
+    }
+
+    @Override
+    public void creerPublicite(Publicite publicite) {
+        this.publiciteFacadeLocal.create(publicite);
+    }
+    
 }
