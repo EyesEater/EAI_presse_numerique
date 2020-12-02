@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.miage.rois.redacchef.service;
+package fr.miage.rois.misesouspresse.services;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import fr.miage.rois.redacchef.entities.Article;
+import fr.miage.rois.misesouspresse.entities.Volume;
 import java.util.List;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -25,18 +25,18 @@ import org.apache.log4j.Logger;
  *
  * @author sagab
  */
-public class RedacChefJMSSender {
+public class VolumeJMSSender {
 
-    public static void envoyerArticlesAMiseSousPresse(List<Article> articles) {
+    public static void envoyerVolumesAGestionDistributeur(List<Volume> volumes) {
         ConnectionFactory factory;
         Connection connection;
         String factoryName = "jms/__defaultConnectionFactory";
-        String destName = "QueueRC";
+        String destName = "QueueMSP";
         Destination dest;
         Session session;
         MessageProducer sender;
         Gson gson = new Gson();
-        Logger logger = Logger.getLogger(RedacChefJMSSender.class);
+        Logger logger = Logger.getLogger(VolumeJMSSender.class);
 
         try {
             System.setProperty("java.naming.factory.initial",
@@ -67,8 +67,8 @@ public class RedacChefJMSSender {
 
             JsonObject articlesJson = new JsonObject();
             int i = 0;
-            for (Article a : articles) {
-                articlesJson.add("article" + i, new JsonParser().parse(gson.toJson(a)));
+            for (Volume v : volumes) {
+                articlesJson.add("volume" + i, new JsonParser().parse(gson.toJson(v)));
                 i++;
             }
             
@@ -78,7 +78,7 @@ public class RedacChefJMSSender {
 
             connection.close();
         } catch (JMSException | NamingException e) {
-            logger.error("Error during sending list of validated Article with JMS.");
+            logger.error("Error during sending list of Volumes with JMS.");
         }
     }
 

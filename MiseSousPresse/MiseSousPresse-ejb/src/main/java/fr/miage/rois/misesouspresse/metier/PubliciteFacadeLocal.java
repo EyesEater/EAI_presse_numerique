@@ -29,5 +29,7 @@ public interface PubliciteFacadeLocal {
     List<Publicite> findRange(int[] range);
 
     int count();
+
+    public List<Publicite> getPublicites();
     
 }
