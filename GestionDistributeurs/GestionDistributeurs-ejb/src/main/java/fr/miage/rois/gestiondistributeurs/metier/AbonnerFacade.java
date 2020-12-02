@@ -6,6 +6,7 @@
 package fr.miage.rois.gestiondistributeurs.metier;
 
 import fr.miage.rois.gestiondistributeurs.entities.Abonner;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,13 @@ public class AbonnerFacade extends AbstractFacade<Abonner> implements AbonnerFac
 
     public AbonnerFacade() {
         super(Abonner.class);
+    }
+
+    @Override
+    public List<Abonner> findAbonnerByTitre(Integer idtitre) {
+        return getEntityManager().createQuery("SELECT a FROM Abonner a WHERE a.abonnerPK.idtitre = :titre")
+                .setParameter("titre", idtitre)
+                .getResultList();
     }
     
 }

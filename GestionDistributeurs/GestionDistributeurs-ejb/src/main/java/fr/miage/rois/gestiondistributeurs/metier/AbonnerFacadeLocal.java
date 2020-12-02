@@ -29,5 +29,7 @@ public interface AbonnerFacadeLocal {
     List<Abonner> findRange(int[] range);
 
     int count();
+
+    public List<Abonner> findAbonnerByTitre(Integer idtitre);
     
 }
