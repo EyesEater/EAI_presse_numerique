@@ -6,6 +6,7 @@
 package fr.miage.rois.misesouspresse.services;
 
 import fr.miage.rois.misesouspresse.entities.Publicite;
+import fr.miage.rois.misesouspresse.entities.Titre;
 import fr.miage.rois.misesouspresse.entities.Volume;
 import java.util.List;
 import javax.ejb.Local;
@@ -24,4 +25,6 @@ public interface GestionVolumeLocal {
     public void affecterEncartsPublicitaires(Volume volume);
 
     public void creerPublicite(Publicite publicite);
+
+    public Titre findTitreById(int idTitre);
 }

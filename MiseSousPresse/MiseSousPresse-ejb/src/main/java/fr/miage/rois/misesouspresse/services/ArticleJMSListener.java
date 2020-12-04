@@ -10,6 +10,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import fr.miage.rois.misesouspresse.entities.Publicite;
+import fr.miage.rois.misesouspresse.entities.Titre;
+import fr.miage.rois.misesouspresse.entities.Volume;
+import java.util.ArrayList;
 import java.util.Iterator;
 import javax.annotation.Resource;
 import javax.ejb.ActivationConfigProperty;
@@ -54,16 +57,19 @@ public class ArticleJMSListener implements MessageListener {
             if (message instanceof TextMessage) {
                 TextMessage tm = (TextMessage) message;
                 String articlesJson = tm.getText();
-
+                System.out.println(articlesJson);
                 JsonObject json = new JsonParser().parse(articlesJson).getAsJsonObject();
                 
-                Iterator<String> it = json.keySet().iterator();
-                while (it.hasNext()) {
-                    String key = it.next();
+                Titre titre = this.gestionVolumeLocal.findTitreById(json.get("idtitre").getAsJsonObject().get("idtitre").getAsInt());
+                
+                if (titre == null) {
+                    Volume volume = new Volume(json.get("idarticle").getAsInt());
+                    volume.setIdtitre(titre);
+                    volume.setNom(json.get("titre").getAsString());
+                    volume.setTermine(false);
+                    volume.setPubliciteCollection(new ArrayList<Publicite>());
                     
-                    JsonObject article = json.get(key).getAsJsonObject();
-                    
-                    
+                    this.gestionVolumeLocal.creerVolume(volume);
                 }
             }
         } catch (JMSException e) {

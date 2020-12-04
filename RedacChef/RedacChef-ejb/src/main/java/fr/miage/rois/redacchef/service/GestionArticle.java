@@ -29,7 +29,8 @@ public class GestionArticle implements GestionArticleLocal {
 
     @Override
     public void validerArticle(Article article) {
-        articleFacadeLocal.valideArticle(article);
+        article.setValide(true);
+        articleFacadeLocal.validerArticle(article);
     }
 
     @Override

@@ -33,8 +33,8 @@ public interface ArticleFacadeLocal {
 
     public List<Article> listeArticlesByTitre(Titre titre);
 
-    public void valideArticle(Article article);
-
     public List<Article> listeArticlesValide();
+
+    public void validerArticle(Article article);
     
 }

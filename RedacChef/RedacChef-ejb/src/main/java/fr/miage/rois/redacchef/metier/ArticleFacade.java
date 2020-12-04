@@ -33,17 +33,22 @@ public class ArticleFacade extends AbstractFacade<Article> implements ArticleFac
 
     @Override
     public List<Article> listeArticlesByTitre(Titre titre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void valideArticle(Article article) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getEntityManager().createQuery("SELECT a FROM Article a WHERE a.idtitre = :titre")
+                .setParameter("titre", titre)
+                .getResultList();
     }
 
     @Override
     public List<Article> listeArticlesValide() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getEntityManager().createQuery("SELECT a FROM Article a WHERE a.valide = true")
+                .getResultList();
+    }
+
+    @Override
+    public void validerArticle(Article article) {
+        getEntityManager().createQuery("UPDATE Article a SET a.valide = true WHERE a.idarticle = :article")
+                .setParameter("article", article.getIdarticle())
+                .executeUpdate();
     }
     
 }

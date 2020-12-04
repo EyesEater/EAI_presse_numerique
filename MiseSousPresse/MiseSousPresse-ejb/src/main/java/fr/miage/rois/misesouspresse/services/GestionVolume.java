@@ -6,8 +6,10 @@
 package fr.miage.rois.misesouspresse.services;
 
 import fr.miage.rois.misesouspresse.entities.Publicite;
+import fr.miage.rois.misesouspresse.entities.Titre;
 import fr.miage.rois.misesouspresse.entities.Volume;
 import fr.miage.rois.misesouspresse.metier.PubliciteFacadeLocal;
+import fr.miage.rois.misesouspresse.metier.TitreFacadeLocal;
 import fr.miage.rois.misesouspresse.metier.VolumeFacadeLocal;
 import java.util.List;
 import javax.ejb.EJB;
@@ -25,6 +27,9 @@ public class GestionVolume implements GestionVolumeLocal {
     
     @EJB
     private PubliciteFacadeLocal publiciteFacadeLocal;
+    
+    @EJB
+    private TitreFacadeLocal titreFacadeLocal;
 
     @Override
     public boolean creerVolume(Volume volume) {
@@ -53,6 +58,11 @@ public class GestionVolume implements GestionVolumeLocal {
     @Override
     public void creerPublicite(Publicite publicite) {
         this.publiciteFacadeLocal.create(publicite);
+    }
+
+    @Override
+    public Titre findTitreById(int idTitre) {
+        return this.titreFacadeLocal.find(idTitre);
     }
     
 }

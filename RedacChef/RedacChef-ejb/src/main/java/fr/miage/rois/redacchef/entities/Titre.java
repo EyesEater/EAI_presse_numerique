@@ -38,6 +38,7 @@ public class Titre implements Serializable {
     @Column(name = "IDTITRE")
     private Integer idtitre;
     @OneToMany(mappedBy = "idtitre")
+    @XmlTransient
     private Collection<Article> articleCollection;
 
     public Titre() {
@@ -86,7 +87,9 @@ public class Titre implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.miage.rois.redacchef.entities.Titre[ idtitre=" + idtitre + " ]";
+        StringBuilder st = new StringBuilder("{");
+        st.append("idtitre:").append(this.idtitre).append("}");
+        return st.toString();
     }
     
 }

@@ -27,11 +27,6 @@ public class AppliRedacChef implements AppliRedacChefLocal {
     private GestionTitreLocal gestionTitreLocal;
 
     @Override
-    public void envoyerMiseSousPresse(Titre titre) {
-        RedacChefJMSSender.envoyerArticlesAMiseSousPresse(gestionArticleLocal.listerArticlesByTitre(titre));
-    }
-
-    @Override
     public void affecterTitre(Titre titre) {
         gestionTitreLocal.affecterTitre(titre);
     }
@@ -44,6 +39,7 @@ public class AppliRedacChef implements AppliRedacChefLocal {
     @Override
     public void validerArticle(Article article) {
         gestionArticleLocal.validerArticle(article);
+        RedacChefJMSSender.envoyerArticlesAMiseSousPresse(article);
     }
 
     @Override

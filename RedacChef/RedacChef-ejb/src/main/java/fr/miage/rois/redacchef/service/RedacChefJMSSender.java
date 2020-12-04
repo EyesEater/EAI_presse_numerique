@@ -27,7 +27,7 @@ import org.apache.log4j.Logger;
  */
 public class RedacChefJMSSender {
 
-    public static void envoyerArticlesAMiseSousPresse(List<Article> articles) {
+    public static void envoyerArticlesAMiseSousPresse(Article article) {
         ConnectionFactory factory;
         Connection connection;
         String factoryName = "jms/__defaultConnectionFactory";
@@ -64,21 +64,14 @@ public class RedacChefJMSSender {
             connection.start();
 
             TextMessage tm = session.createTextMessage();
-
-            JsonObject articlesJson = new JsonObject();
-            int i = 0;
-            for (Article a : articles) {
-                articlesJson.add("article" + i, new JsonParser().parse(gson.toJson(a)));
-                i++;
-            }
             
-            tm.setText(articlesJson.getAsString());
+            tm.setText(article.toString());
             
             sender.send(tm);
 
             connection.close();
         } catch (JMSException | NamingException e) {
-            logger.error("Error during sending list of validated Article with JMS.");
+            logger.error("Error during sending validated Article with JMS.");
         }
     }
 

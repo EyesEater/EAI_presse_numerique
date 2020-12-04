@@ -18,9 +18,7 @@ import javax.naming.NamingException;
  */
 @Local
 public interface AppliRedacChefLocal {
-    
-    public void envoyerMiseSousPresse(Titre titre);
-    
+        
     public void affecterTitre(Titre titre);
     
     public List<Article> listerArticlesByTitre(Titre titre);

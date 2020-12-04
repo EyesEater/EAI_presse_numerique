@@ -142,9 +142,33 @@ public class Article implements Serializable {
         return true;
     }
 
+    /**
+     * private Integer idarticle;
+    private String titre;
+    private String motscles;
+    private Integer auteur;
+    private String contenu;
+    private Boolean valide;
+    private Titre idtitre;
+     * @return 
+     */
     @Override
     public String toString() {
-        return "fr.miage.rois.redacchef.entities.Article[ idarticle=" + idarticle + " ]";
+        String[] motscles = this.motscles.split(",");
+        StringBuilder st = new StringBuilder("{");
+        st.append("idarticle:").append(this.idarticle).append(",")
+                .append("titre:\"").append(this.titre).append("\",")
+                .append("contenu:\"").append(this.contenu).append("\",")
+                .append("auteur:").append(this.auteur).append(",")
+                .append("valide:").append(this.valide).append(",")
+                .append("idtitre:").append(this.idtitre).append(",")
+                .append("motscles:[");
+        
+        for (String mot : motscles) {
+            st.append("\"").append(mot).append("\",");
+        }
+        st.deleteCharAt(st.length()-1).append("]}");
+        return st.toString();
     }
     
 }
