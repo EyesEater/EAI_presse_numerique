@@ -44,14 +44,14 @@ public class GestionVolume implements GestionVolumeLocal {
     }
 
     @Override
-    public void affecterNumeroAUnVolume(int numero, Volume volume) {
+    public void affecterNumeroAUnVolume(int numero, int volume) {
         this.volumeFacadeLocal.affecterNumeroAUnVolume(numero, volume);
     }
 
     @Override
     public void affecterEncartsPublicitaires(Volume volume) {
         List<Publicite> pubs = this.publiciteFacadeLocal.getPublicites();
-        
+
         this.volumeFacadeLocal.affecterListPub(volume, pubs);
     }
 
@@ -63,6 +63,11 @@ public class GestionVolume implements GestionVolumeLocal {
     @Override
     public Titre findTitreById(int idTitre) {
         return this.titreFacadeLocal.find(idTitre);
+    }
+
+    @Override
+    public Volume findVolume(int idVolume) {
+        return this.volumeFacadeLocal.find(idVolume);
     }
     
 }

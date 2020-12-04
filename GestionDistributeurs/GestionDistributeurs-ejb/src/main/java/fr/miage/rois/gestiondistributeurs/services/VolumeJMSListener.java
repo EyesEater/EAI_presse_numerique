@@ -5,7 +5,6 @@
  */
 package fr.miage.rois.gestiondistributeurs.services;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import fr.miage.rois.gestiondistributeurs.entities.Titre;

@@ -48,7 +48,7 @@ public class VolumeFacade extends AbstractFacade<Volume> implements VolumeFacade
     }
 
     @Override
-    public void affecterNumeroAUnVolume(int numero, Volume volume) {
+    public void affecterNumeroAUnVolume(int numero, int volume) {
         getEntityManager().createQuery("UPDATE Volume v SET v.numero = :numero WHERE v.idvolume = :volume")
                 .setParameter("numero", numero)
                 .setParameter("volume", volume)

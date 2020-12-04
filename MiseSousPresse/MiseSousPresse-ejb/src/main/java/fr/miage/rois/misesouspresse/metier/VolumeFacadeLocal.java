@@ -33,7 +33,7 @@ public interface VolumeFacadeLocal {
 
     public Volume findById(Integer idvolume);
 
-    public void affecterNumeroAUnVolume(int numero, Volume volume);
+    public void affecterNumeroAUnVolume(int numero, int volume);
 
     public void affecterListPub(Volume volume, List<Publicite> pubs);
     

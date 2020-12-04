@@ -5,10 +5,10 @@
  */
 package fr.miage.rois.misesouspresse.services;
 
+import com.google.gson.JsonElement;
 import fr.miage.rois.misesouspresse.entities.Publicite;
 import fr.miage.rois.misesouspresse.entities.Titre;
 import fr.miage.rois.misesouspresse.entities.Volume;
-import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -20,11 +20,13 @@ public interface GestionVolumeLocal {
     
     public boolean creerVolume(Volume volume);
     
-    public void affecterNumeroAUnVolume(int numero, Volume volume);
+    public void affecterNumeroAUnVolume(int numero, int volume);
     
     public void affecterEncartsPublicitaires(Volume volume);
 
     public void creerPublicite(Publicite publicite);
 
     public Titre findTitreById(int idTitre);
+
+    public Volume findVolume(int idVolume);
 }

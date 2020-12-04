@@ -123,7 +123,6 @@ public class ArticleResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public void ajouterArticle(@QueryParam("article") String article) {
-        System.out.println("TEST POST");
         JsonObject articleJson = new JsonParser().parse(article).getAsJsonObject();
         Titre titre = this.appliRedacChef.findTitre(articleJson.get("idtitre").getAsInt());
         Article a = new Article(articleJson.get("idarticle").getAsInt());
