@@ -69,5 +69,10 @@ public class GestionVolume implements GestionVolumeLocal {
     public Volume findVolume(int idVolume) {
         return this.volumeFacadeLocal.find(idVolume);
     }
+
+    @Override
+    public void miseEnPage(Volume volume) {
+        VolumeJMSSender.envoyerVolumeAGestionDistributeur(volume);
+    }
     
 }

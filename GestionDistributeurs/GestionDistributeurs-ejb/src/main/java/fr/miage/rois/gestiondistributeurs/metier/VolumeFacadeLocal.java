@@ -5,6 +5,7 @@
  */
 package fr.miage.rois.gestiondistributeurs.metier;
 
+import fr.miage.rois.gestiondistributeurs.entities.Titre;
 import fr.miage.rois.gestiondistributeurs.entities.Volume;
 import java.util.List;
 import javax.ejb.Local;
@@ -30,6 +31,6 @@ public interface VolumeFacadeLocal {
 
     int count();
 
-    public List<Volume> findVolumesByTitre(Integer idtitre);
+    public List<Volume> findVolumesByTitre(Titre idtitre);
     
 }

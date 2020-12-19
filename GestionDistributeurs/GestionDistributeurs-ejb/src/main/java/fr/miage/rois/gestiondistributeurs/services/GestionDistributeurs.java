@@ -72,7 +72,7 @@ public class GestionDistributeurs implements GestionDistributeursLocal {
 
     @Override
     public Volume findVolumeById(int idvolume) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.volumeFacadeLocal.find(idvolume);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class GestionDistributeurs implements GestionDistributeursLocal {
         Titre titre = this.titreFacadeLocal.find(idTitre);
         
         if (titre != null) {
-            ArrayList<Volume> volumes = new ArrayList(this.volumeFacadeLocal.findVolumesByTitre(titre.getIdtitre()));
+            ArrayList<Volume> volumes = new ArrayList(this.volumeFacadeLocal.findVolumesByTitre(titre));
             
             for (Volume volume : volumes) {
                 DistributionVolumeJMSSender.envoyerVolumeAuxDistributeurs(volume);

@@ -116,7 +116,13 @@ public class Publicite implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.miage.rois.misesouspresse.entities.Publicite[ idpub=" + idpub + " ]";
+        StringBuilder st = new StringBuilder("{");
+        st.append("idpub:").append(this.idpub).append(",contenu:").append(this.contenu).append(",image:").append(this.image).append(",volumes:[");
+        for (Volume v : this.volumeCollection) {
+            st.append("idvolume:").append(v.getIdvolume()).append(",");
+        }
+        st.deleteCharAt(st.length()-1).append("]}");
+        return st.toString();
     }
     
 }

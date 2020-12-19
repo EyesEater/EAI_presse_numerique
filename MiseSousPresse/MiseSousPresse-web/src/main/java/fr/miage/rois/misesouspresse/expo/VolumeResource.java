@@ -97,6 +97,17 @@ public class VolumeResource {
             this.gestionVolume.affecterEncartsPublicitaires(volume);
         }
     }
+    
+    @Path("miseenpage/{idVolume}")
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void miseEnPage(@PathParam("idVolume") String idVolume) {
+        Volume volume = this.gestionVolume.findVolume(Integer.parseInt(idVolume));
+        
+        if (volume != null) {
+            this.gestionVolume.miseEnPage(volume);
+        }
+    }
 
     private fr.miage.rois.misesouspresse.services.GestionVolumeLocal lookupGestionVolumeLocal() {
         try {

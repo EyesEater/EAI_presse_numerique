@@ -27,7 +27,7 @@ import org.apache.log4j.Logger;
  */
 public class VolumeJMSSender {
 
-    public static void envoyerVolumesAGestionDistributeur(List<Volume> volumes) {
+    public static void envoyerVolumeAGestionDistributeur(Volume volume) {
         ConnectionFactory factory;
         Connection connection;
         String factoryName = "jms/__defaultConnectionFactory";
@@ -64,15 +64,8 @@ public class VolumeJMSSender {
             connection.start();
 
             TextMessage tm = session.createTextMessage();
-
-            JsonObject articlesJson = new JsonObject();
-            int i = 0;
-            for (Volume v : volumes) {
-                articlesJson.add("volume" + i, new JsonParser().parse(gson.toJson(v)));
-                i++;
-            }
             
-            tm.setText(articlesJson.getAsString());
+            tm.setText(volume.toString());
             
             sender.send(tm);
 

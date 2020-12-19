@@ -5,6 +5,7 @@
  */
 package fr.miage.rois.gestiondistributeurs.services;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import fr.miage.rois.gestiondistributeurs.entities.Titre;
@@ -51,42 +52,40 @@ public class VolumeJMSListener implements MessageListener {
                 
                 TextMessage tm = (TextMessage) message;
                 String volumesJson = tm.getText();
+                System.out.println("APPLICATION DISTRIBUTEUR");
+                System.out.println(volumesJson);
+                JsonObject volumeJson = new JsonParser().parse(volumesJson).getAsJsonObject();
+                JsonObject titreJson = volumeJson.get("idtitre").getAsJsonObject();
+                
+                Titre titre = this.gestionDistributeursLocal.findTitreById(titreJson.get("idtitre").getAsInt());
 
-                JsonObject json = new JsonParser().parse(volumesJson).getAsJsonObject();
-
-                Iterator<String> it = json.keySet().iterator();
-                while (it.hasNext()) {
-                    String key = it.next();
-                    
-                    JsonObject volumeJson = json.get(key).getAsJsonObject();
-                    JsonObject titreJson = volumeJson.get("idtitre").getAsJsonObject();
-                    
-                    
-                    Titre titre = this.gestionDistributeursLocal.findTitreById(titreJson.get("idtitre").getAsInt());
-                    
-                    if (titre == null) {
-                        titre = new Titre(titreJson.get("idtitre").getAsInt());
-                        titre.setMotscles(titreJson.get("motscles").getAsString());
-                        titre.setNom(titreJson.get("nom").getAsString());
-                        
-                        this.gestionDistributeursLocal.creerTitre(titre);
+                if (titre == null) {
+                    titre = new Titre(titreJson.get("idtitre").getAsInt());
+                    StringBuilder motscle = new StringBuilder();
+                    for (JsonElement e : titreJson.get("motscles").getAsJsonArray()) {
+                        motscle.append(e.getAsString()).append(",");
                     }
-                    
-                    Volume volume = this.gestionDistributeursLocal.findVolumeById(volumeJson.get("idvolume").getAsInt());
-                    
-                    if (volume == null) {
-                        volume = new Volume(volumeJson.get("idvolume").getAsInt());
-                        volume.setNom(volumeJson.get("nom").getAsString());
-                        volume.setNumero(volumeJson.get("numero").getAsInt());
-                        volume.setTermine(volumeJson.get("termine").getAsBoolean());
-                        volume.setIdtitre(titre);
+                    motscle.deleteCharAt(motscle.length()-1);
+                    titre.setMotscles(motscle.toString());
+                    titre.setNom(titreJson.get("nom").getAsString());
 
-                        this.gestionDistributeursLocal.creerVolume(volume);
-                    }
-                    
-                    VolumeRESTSender.envoyerTitreAAppliRecherche(titre);
-                    VolumeRESTSender.envoyerVolumeAAppliRecherche(volume);
+                    this.gestionDistributeursLocal.creerTitre(titre);
                 }
+                    
+                Volume volume = this.gestionDistributeursLocal.findVolumeById(volumeJson.get("idvolume").getAsInt());
+
+                if (volume == null) {
+                    volume = new Volume(volumeJson.get("idvolume").getAsInt());
+                    volume.setNom(volumeJson.get("nom").getAsString());
+                    volume.setNumero(volumeJson.get("numero").getAsInt());
+                    volume.setTermine(volumeJson.get("termine").getAsBoolean());
+                    volume.setIdtitre(titre);
+
+                    this.gestionDistributeursLocal.creerVolume(volume);
+                }
+
+                VolumeRESTSender.envoyerTitreAAppliRecherche(titre);
+                VolumeRESTSender.envoyerVolumeAAppliRecherche(volume);
                
             }
         } catch (JMSException e) {

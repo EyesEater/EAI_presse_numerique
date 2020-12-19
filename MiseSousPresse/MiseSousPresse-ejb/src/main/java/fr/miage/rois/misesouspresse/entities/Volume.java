@@ -134,7 +134,14 @@ public class Volume implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.miage.rois.misesouspresse.entities.Volume[ idvolume=" + idvolume + " ]";
+        StringBuilder st = new StringBuilder("{");
+        st.append("idvolume:").append(this.idvolume).append(",idtitre:").append(this.idtitre.toString()).append(",nom:\"")
+                .append(this.nom).append("\",numero:").append(this.numero).append(",termine:").append(this.termine).append(",publicites:[ ");
+        for (Publicite p : this.publiciteCollection) {
+            st.append(p.toString()).append(",");
+        }
+        st.deleteCharAt(st.length()-1).append("]}");
+        return st.toString();
     }
     
 }

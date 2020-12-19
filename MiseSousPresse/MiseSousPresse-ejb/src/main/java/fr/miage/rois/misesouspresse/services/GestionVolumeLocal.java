@@ -25,6 +25,8 @@ public interface GestionVolumeLocal {
     public void affecterEncartsPublicitaires(Volume volume);
 
     public void creerPublicite(Publicite publicite);
+    
+    public void miseEnPage(Volume volume);
 
     public Titre findTitreById(int idTitre);
 
