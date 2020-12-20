@@ -124,7 +124,13 @@ public class Titre implements Serializable {
     @Override
     public String toString() {
         StringBuilder st = new StringBuilder("{");
-        st.append("idtitre:").append(this.idtitre).append(",motscles:[").append(this.motscles).append("],nom:").append(this.nom).append(",volumes:[");
+        String[] motscles = this.motscles.split(",");
+        st.append("idtitre:").append(this.idtitre).append(",motscles:[");
+        for (String s : motscles)
+                st.append("\"").append(s).append("\",");
+        if (st.charAt(st.length()-1) == ',')
+            st.deleteCharAt(st.length()-1);
+        st.append("],nom:\"").append(this.nom).append("\",volumes:[");
         for (Volume v : this.volumeCollection) {
             st.append(v.getIdvolume()).append(",");
         }

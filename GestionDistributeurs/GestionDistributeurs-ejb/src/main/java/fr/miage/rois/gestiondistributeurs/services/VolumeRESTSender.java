@@ -35,8 +35,7 @@ public class VolumeRESTSender {
             
             byte[] out = volume.toString().getBytes(StandardCharsets.UTF_8);
             int length = out.length;
-            System.out.println("TEST");
-            System.out.println(out);
+            
             http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             http.connect();
