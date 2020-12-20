@@ -58,7 +58,7 @@ public class TitreResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getTitre(@PathParam("idTitre") String idTitre) {
         Titre titre = this.appliRedacChef.findTitre(Integer.parseInt(idTitre));
-        return gson.toJson(titre);
+        return titre.toString();
     }
     
     /**
