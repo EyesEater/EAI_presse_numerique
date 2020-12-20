@@ -65,7 +65,7 @@ public class DistributionVolumeJMSSender {
 
             TextMessage tm = session.createTextMessage();
             
-            tm.setText(gson.toJson(volume));
+            tm.setText(volume.toString());
             
             sender.send(tm);
 
