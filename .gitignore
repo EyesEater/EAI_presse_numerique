@@ -46,3 +46,6 @@ Conception/EAI.vpp.bak*
 /GestionDistributeurs/GestionDistributeurs-web/target/
 /GestionDistributeurs/GestionDistributeurs-ear/target/
 /Distributeur/target/
+/AppDistributeur/AppDistributeur-ejb/target/
+/AppDistributeur/AppDistributeur-web/target/
+/AppDistributeur/AppDistributeur-ear/target/
