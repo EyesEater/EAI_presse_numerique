@@ -53,9 +53,9 @@ public class SAbonnerJMSListener implements MessageListener {
 
                 JsonObject json = new JsonParser().parse(abonnementJson).getAsJsonObject();
 
-                int idDistrib = json.get("iddistributeur").getAsInt();
-                int idTitre = json.get("idtitre").getAsInt();
-                int nbCopies = json.get("nbcopies").getAsInt();
+                int idDistrib = json.get("idDistributeur").getAsInt();
+                int idTitre = json.get("idTitre").getAsInt();
+                int nbCopies = json.get("nbCopies").getAsInt();
                 int cout = json.get("cout").getAsInt();
                 int duree = json.get("duree").getAsInt();
                 
@@ -63,6 +63,11 @@ public class SAbonnerJMSListener implements MessageListener {
                 Titre titre = this.gestionDistributeursLocal.findTitreById(idTitre);
                 
                 if (distributeur != null && titre != null) {
+                    this.gestionDistributeursLocal.abonnerDistribTitre(distributeur, titre, nbCopies, cout, duree);
+                } else {
+                    this.gestionDistributeursLocal.creerCompte(new Distributeur(idDistrib));
+                    distributeur = this.gestionDistributeursLocal.findDistribById(idDistrib);
+                
                     this.gestionDistributeursLocal.abonnerDistribTitre(distributeur, titre, nbCopies, cout, duree);
                 }
                
