@@ -86,6 +86,8 @@ public class VolumeJMSListener implements MessageListener {
 
                 VolumeRESTSender.envoyerTitreAAppliRecherche(titre);
                 VolumeRESTSender.envoyerVolumeAAppliRecherche(volume);
+                
+                DistributionVolumeJMSSender.envoyerVolumeAuxDistributeurs(volume);
                
             }
         } catch (JMSException e) {
