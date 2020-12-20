@@ -49,7 +49,6 @@ public class VolumeJMSListener implements MessageListener {
     public void onMessage(Message message) {
         try {
             if (message instanceof TextMessage) {
-                
                 TextMessage tm = (TextMessage) message;
                 String volumesJson = tm.getText();
                 System.out.println("APPLICATION DISTRIBUTEUR");

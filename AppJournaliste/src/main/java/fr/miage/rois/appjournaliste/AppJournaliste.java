@@ -17,7 +17,7 @@ public class AppJournaliste {
     public static void main(String[] args) {
         Sender sender = new Sender();
         
-        Article article = new Article(1, "Un joli titre", "un,joli,titre", 1, "Lorem ipsum", false, 1);
+        Article article = new Article(2, "Titre mignon", "mignon,titre", 1, "Contenu", false, 1);
         sender.setArticle(article);
         
         sender.start();

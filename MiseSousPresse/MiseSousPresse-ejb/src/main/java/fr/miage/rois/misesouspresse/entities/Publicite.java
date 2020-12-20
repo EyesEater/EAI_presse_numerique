@@ -117,11 +117,7 @@ public class Publicite implements Serializable {
     @Override
     public String toString() {
         StringBuilder st = new StringBuilder("{");
-        st.append("idpub:").append(this.idpub).append(",contenu:").append(this.contenu).append(",image:").append(this.image).append(",volumes:[");
-        for (Volume v : this.volumeCollection) {
-            st.append("idvolume:").append(v.getIdvolume()).append(",");
-        }
-        st.deleteCharAt(st.length()-1).append("]}");
+        st.append("idpub:").append(this.idpub).append(",contenu:").append(this.contenu).append(",image:").append(this.image).append("}");
         return st.toString();
     }
     

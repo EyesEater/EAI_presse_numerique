@@ -123,7 +123,13 @@ public class Titre implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.miage.rois.gestiondistributeurs.entities.Titre[ idtitre=" + idtitre + " ]";
+        StringBuilder st = new StringBuilder("{");
+        st.append("idtitre:").append(this.idtitre).append(",motscles:[").append(this.motscles).append("],nom:").append(this.nom).append(",volumes:[");
+        for (Volume v : this.volumeCollection) {
+            st.append(v.getIdvolume()).append(",");
+        }
+        st.deleteCharAt(st.length()-1).append("]}");
+        return st.toString();
     }
     
 }

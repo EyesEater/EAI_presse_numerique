@@ -33,9 +33,10 @@ public class VolumeRESTSender {
             http.setRequestMethod("POST");
             http.setDoOutput(true);
             
-            byte[] out = gson.toJson(volume).getBytes(StandardCharsets.UTF_8);
+            byte[] out = volume.toString().getBytes(StandardCharsets.UTF_8);
             int length = out.length;
-
+            System.out.println("TEST");
+            System.out.println(out);
             http.setFixedLengthStreamingMode(length);
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             http.connect();
@@ -43,7 +44,7 @@ public class VolumeRESTSender {
             try (OutputStream os = http.getOutputStream()) {
                 os.write(out);
             }
-            
+            System.out.println(http.getResponseMessage());
         } catch (MalformedURLException e) {
             logger.error("Envoie du Volume :" + volume.toString() + " en POST impossible avec l'URL donnée");
         } catch (IOException e) {
@@ -61,7 +62,7 @@ public class VolumeRESTSender {
             http.setRequestMethod("POST");
             http.setDoOutput(true);
             
-            byte[] out = gson.toJson(titre).getBytes(StandardCharsets.UTF_8);
+            byte[] out = titre.toString().getBytes(StandardCharsets.UTF_8);
             int length = out.length;
 
             http.setFixedLengthStreamingMode(length);
